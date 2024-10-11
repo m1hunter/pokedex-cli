@@ -46,6 +46,7 @@ func (c *Cache) Get(key string) ([]byte, bool) {
 	return val.val, ok
 }
 
+// readLoop for iterating over cache hashmap
 func (c *Cache) reapLoop(interval time.Duration) {
 	ticker := time.NewTicker(interval)
 	for range ticker.C {
@@ -53,6 +54,7 @@ func (c *Cache) reapLoop(interval time.Duration) {
 	}
 }
 
+// Cleanup func, if data is older than now minus last, delete it from hashmap
 func (c *Cache) reap(now time.Time, last time.Duration) {
 	c.mux.Lock()
 	defer c.mux.Unlock()

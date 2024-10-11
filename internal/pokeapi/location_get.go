@@ -2,6 +2,7 @@ package pokeapi
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 )
@@ -12,6 +13,7 @@ func (c *Client) GetLocation(locationName string) (Location, error) {
 
 	if val, ok := c.cache.Get(url); ok {
 		locationResp := Location{}
+		fmt.Println(locationResp)
 		err := json.Unmarshal(val, &locationResp)
 		if err != nil {
 			return Location{}, err
